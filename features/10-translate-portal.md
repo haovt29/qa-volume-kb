@@ -1,8 +1,8 @@
-# Translate Portal
+# 10. Translate Portal
 
 **Status:** in-review
 
-Distinct from [Translate Offers](translate-offers.md): Translate Offers
+Distinct from [Translate Offers](07-translate-offers.md): Translate Offers
 translates offer/promotion content, this feature translates the **portal**
 (widget UI shown to shoppers) itself. Confirm exact relationship/overlap
 between the two once both are analyzed — may share settings or UI.
@@ -40,7 +40,7 @@ Português (Brasil) vs Português (Portugal) differ in more than just locale cod
 
 ## Advanced Settings
 
-_TODO: confirm whether this shares any settings with [Custom CSS](../product/custom-css.md) or [Translate Offers](translate-offers.md)._
+_TODO: confirm whether this shares any settings with [Custom CSS](../product/custom-css.md) or [Translate Offers](07-translate-offers.md)._
 
 ## Known Issues
 

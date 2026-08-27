@@ -1,4 +1,4 @@
-# Analytics
+# 8. Analytics
 
 **Status:** skeleton
 

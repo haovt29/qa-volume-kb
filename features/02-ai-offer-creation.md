@@ -1,4 +1,4 @@
-# AI Offer Creation
+# 2. AI Offer Creation
 
 **Status:** skeleton
 

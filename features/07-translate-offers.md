@@ -1,4 +1,4 @@
-# How to Translate Offers
+# 7. Translate Offers
 
 **Status:** skeleton
 

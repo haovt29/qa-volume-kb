@@ -10,9 +10,9 @@ per feature. Moved out of `features/` (2026-08-27), see
 
 ## Applies within
 
-- [Multibuy – Mix & Match Combo](../features/multibuy-mix-match-combo.md)
-- [Wholesale Pricing Offer](../features/wholesale-pricing-offer.md)
-- [Quantity Break](../features/quantity-break.md)
+- [Multibuy – Mix & Match Combo](../features/04-multibuy-mix-match-combo.md)
+- [Wholesale Pricing Offer](../features/05-wholesale-pricing-offer.md)
+- [Quantity Break](../features/03-quantity-break.md)
 - _TODO: confirm which other offer types also expose this field, and whether it's identical across all of them or has per-widget differences._
 
 ## Purpose

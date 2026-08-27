@@ -1,4 +1,4 @@
-# Variant Swatches
+# 6. Variant Swatches
 
 **Status:** skeleton
 

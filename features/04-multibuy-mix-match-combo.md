@@ -1,10 +1,10 @@
-# Wholesale Pricing Offer
+# 4. Multibuy – Mix & Match Combo
 
 **Status:** skeleton
 
 ## Purpose
 
-Configure quantity-based discount tiers on product pages, with automatic tier application.
+Lets merchants create promotions where customers purchase a set number of products at discounted prices.
 
 _TODO: rewrite/confirm against current app behavior._
 
@@ -22,7 +22,7 @@ Shares the [Custom CSS](../product/custom-css.md) input field with other offer t
 
 ## Known Issues
 
-See [known-issues.md](../known-issues/known-issues.md) for entries tagged `wholesale-pricing-offer`.
+See [known-issues.md](../known-issues/known-issues.md) for entries tagged `multibuy-mix-match-combo`.
 
 ## Related Jira Tickets
 
@@ -30,4 +30,4 @@ _TODO_
 
 ## Source
 
-- Help center (may be outdated): https://help.qikify.com/en/article/wholesale-pricing-offer-18jsbca/
+- Help center (may be outdated): https://help.qikify.com/en/article/multibuy-mix-match-combo-1iht99r/

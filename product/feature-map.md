@@ -8,9 +8,9 @@ feature's file — e.g. "what happens if a customer qualifies for both
 Wholesale Pricing and the Buy X Get Y variant of Quantity Break at once?"
 
 Update this whenever a change to one feature affects another. Note that
-`quantity-break.md` itself has 3 variants (same-product tiers, Buy X Get Y,
+`03-quantity-break.md` itself has 3 variants (same-product tiers, Buy X Get Y,
 subscription products) that can also interact with *each other* — track
-those inside `quantity-break.md`, reserve this file for interactions
+those inside `03-quantity-break.md`, reserve this file for interactions
 *across* separate feature files.
 
 ## Features in scope
@@ -19,19 +19,19 @@ those inside `quantity-break.md`, reserve this file for interactions
 
 Offer types (can stack/conflict with each other at cart/checkout — the
 interactions this file is mainly for):
-- [Multibuy – Mix & Match Combo](../features/multibuy-mix-match-combo.md)
-- [Wholesale Pricing Offer](../features/wholesale-pricing-offer.md)
-- [Quantity Break](../features/quantity-break.md) (variants: same-product tiers, Buy X Get Y, subscription products)
+- [Multibuy – Mix & Match Combo](../features/04-multibuy-mix-match-combo.md)
+- [Wholesale Pricing Offer](../features/05-wholesale-pricing-offer.md)
+- [Quantity Break](../features/03-quantity-break.md) (variants: same-product tiers, Buy X Get Y, subscription products)
 
 Other features (config/reporting/onboarding — listed for completeness;
 unlikely to conflict with offer types, but note here if one turns out to):
-- [Variant Swatches](../features/variant-swatches.md)
-- [Translate Offers](../features/translate-offers.md)
-- [Translate Portal](../features/translate-portal.md)
-- [Analytics](../features/analytics.md)
-- [Onboarding Dashboard](../features/onboarding-dashboard.md)
-- [Ask for Review](../features/ask-for-review.md)
-- [AI Offer Creation](../features/ai-offer-creation.md) (meta: creates the offer types above — check it produces valid configs for each)
+- [Variant Swatches](../features/06-variant-swatches.md)
+- [Translate Offers](../features/07-translate-offers.md)
+- [Translate Portal](../features/10-translate-portal.md)
+- [Analytics](../features/08-analytics.md)
+- [Onboarding Dashboard](../features/01-onboarding-dashboard.md)
+- [Ask for Review](../features/09-ask-for-review.md)
+- [AI Offer Creation](../features/02-ai-offer-creation.md) (meta: creates the offer types above — check it produces valid configs for each)
 
 ## Known interactions
 

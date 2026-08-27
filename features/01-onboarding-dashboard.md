@@ -1,4 +1,4 @@
-# Onboarding Dashboard
+# 1. Onboarding Dashboard
 
 **Status:** skeleton
 
