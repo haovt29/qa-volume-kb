@@ -18,17 +18,36 @@ current app behavior. Status is tracked at the top of each file:
 ## Structure
 
 ```
-features/            one file per feature/module
-  <feature-slug>.md
+README.md             human-facing overview (this file)
+AGENTS.md              instructions for AI agents editing this repo
+CLAUDE.md              -> points to AGENTS.md
+product/
+  overview.md          what the app does, at a glance
+  glossary.md           terms used inconsistently elsewhere
+  feature-map.md         cross-feature interactions (stacking, conflicts)
+features/
+  <feature-slug>.md      one file per feature/module
+testing/
+  regression-checklist.md  cross-feature "always check this" list
+  test-data.md              reusable test data / store setup
+  environments.md            staging URLs, accounts, access
+decisions/
+  decision-log.md         append-only "why is it this way"
+known-issues/
+  known-issues.md          current bugs/limitations, tagged by feature
+dev-references/
+  references.md            links: Jira, repos, Slack
 ```
 
 Each feature file has:
 - **Purpose** — what the feature does, in one paragraph
 - **Business Rules** — the rules the app is supposed to enforce
 - **Edge Cases** — boundary/unusual conditions worth testing
-- **Known Issues / Limitations** — anything already known to be broken or intentionally limited
+- **Known Issues** — link into `known-issues/known-issues.md` (not duplicated locally, to avoid drift)
 - **Related Jira Tickets** — tickets that informed or changed this feature
 - **Source** — where the info came from (help center article, ticket, direct testing)
+
+Full editing conventions for agents are in [AGENTS.md](AGENTS.md).
 
 ## How this KB is used
 

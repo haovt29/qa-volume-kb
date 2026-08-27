@@ -16,9 +16,9 @@ _TODO: fill in via /analysis against related Jira tickets._
 
 _TODO_
 
-## Known Issues / Limitations
+## Known Issues
 
-_TODO_
+See [known-issues.md](../known-issues/known-issues.md) for entries tagged `buy-x-get-y`.
 
 ## Related Jira Tickets
 
