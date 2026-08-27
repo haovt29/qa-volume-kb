@@ -15,7 +15,6 @@ Update this whenever a change to one feature affects another.
 - [Multibuy – Mix & Match Combo](../features/multibuy-mix-match-combo.md)
 - [Wholesale Pricing Offer](../features/wholesale-pricing-offer.md)
 - [Quantity Breaks for Same Product Offer](../features/quantity-breaks-same-product.md)
-- [Product Recommendations (Upselling)](../features/product-recommendations-upselling.md)
 - [Volume Discounts for Subscription Products](../features/volume-discounts-subscription-products.md)
 - [Buy X Get Y](../features/buy-x-get-y.md)
 - [Variant Swatches](../features/variant-swatches.md)

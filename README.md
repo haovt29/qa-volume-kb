@@ -77,7 +77,6 @@ Full editing conventions for agents are in [AGENTS.md](AGENTS.md).
 | [multibuy-mix-match-combo.md](features/multibuy-mix-match-combo.md) | Multibuy – Mix & Match Combo | skeleton |
 | [wholesale-pricing-offer.md](features/wholesale-pricing-offer.md) | Wholesale Pricing Offer | skeleton |
 | [quantity-breaks-same-product.md](features/quantity-breaks-same-product.md) | Quantity Breaks for Same Product Offer | skeleton |
-| [product-recommendations-upselling.md](features/product-recommendations-upselling.md) | Product Recommendations (Upselling) | skeleton |
 | [volume-discounts-subscription-products.md](features/volume-discounts-subscription-products.md) | Volume Discounts for Subscription Products | skeleton |
 | [translate-offers.md](features/translate-offers.md) | How to Translate Offers | skeleton |
 | [buy-x-get-y.md](features/buy-x-get-y.md) | Buy X Get Y | skeleton |
@@ -85,4 +84,6 @@ Full editing conventions for agents are in [AGENTS.md](AGENTS.md).
 
 Note: the help center is known to lag behind the current app, so treat the
 list above as a starting skeleton, not ground truth — features may have been
-added, changed, or removed since those articles were last updated.
+added, changed, or removed since those articles were last updated. Confirmed
+example: "Product Recommendations (Upselling)" was listed on the help center
+but does not exist in the app — removed, see [decisions/decision-log.md](decisions/decision-log.md).

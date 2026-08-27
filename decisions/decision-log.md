@@ -18,4 +18,15 @@ decision changes, and note it supersedes the old one.
 
 ## Log
 
-_No entries yet._
+## 2026-08-27 — Removed "Product Recommendations (Upselling)" from features
+
+**Decision:** removed `features/product-recommendations-upselling.md` and its
+references in README/feature-map. Not tracked as a QVL feature.
+**Why:** the initial feature skeleton was pulled from the public help center
+(help.qikify.com/en/category/qikify-volume-discounts-jy3mk3/), which listed
+"Product Recommendations (Upselling)" as an article under that category. QA
+confirmed directly that this feature does not exist in the app — the help
+center entry is stale, mislabeled, or for a different app. Treat this as
+confirmation that the help center is not reliable ground truth; every
+skeleton feature should be verified the same way before being trusted.
+**Source:** QA, direct confirmation in conversation.
