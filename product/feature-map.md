@@ -41,4 +41,6 @@ behavior undefined/untested?_
 
 | Feature A | Feature B | Interaction | Source |
 |---|---|---|---|
-| _TODO_ | _TODO_ | _TODO_ | _TODO_ |
+| AI Offer Creation | Quantity Break, Multibuy, Wholesale Pricing | AI generates a config for one of these 3 offer types (5 template cards map to Quantity Break's 3 variants + Multibuy + Wholesale); the generated offer must still obey each offer type's own business rules — not a separate validation path | QVD-161 |
+| AI Offer Creation | Ask for Review | Saving an AI-created offer (`isAiGenerated` flag) triggers the Ask for Review overlay; manually-created offers never do | QVD-171 |
+| AI Offer Creation | Onboarding Dashboard | AI Offer Creation lives on the offer creation page (reached via "Create offer" from onboarding/dashboard), not on Home itself — confirm no AI-assistant surface exists directly on Home | QVD-161, inferred |
