@@ -70,15 +70,21 @@ Full editing conventions for agents are in [AGENTS.md](AGENTS.md).
 4. Update the feature file, bump its status.
 5. Re-upload changed files into Testlane's QVL project context.
 
-## Features (from help.qikify.com/en/category/qikify-volume-discounts-jy3mk3/)
+## Features
+
+Started from help.qikify.com/en/category/qikify-volume-discounts-jy3mk3/,
+corrected and extended by QA directly (see decision-log for each change).
 
 | File | Topic | Status |
 |---|---|---|
 | [multibuy-mix-match-combo.md](features/multibuy-mix-match-combo.md) | Multibuy – Mix & Match Combo | skeleton |
 | [wholesale-pricing-offer.md](features/wholesale-pricing-offer.md) | Wholesale Pricing Offer | skeleton |
 | [quantity-break.md](features/quantity-break.md) | Quantity Break (variants: same-product tiers, Buy X Get Y, subscription products) | skeleton |
-| [translate-offers.md](features/translate-offers.md) | How to Translate Offers | skeleton |
+| [translate-offers.md](features/translate-offers.md) | Translate Offers | skeleton |
+| [translate-portal.md](features/translate-portal.md) | Translate Portal (8 languages listed, QA said 9 — needs confirmation) | in-review |
 | [variant-swatches.md](features/variant-swatches.md) | Variant Swatches | skeleton |
+| [analytics.md](features/analytics.md) | Analytics | skeleton |
+| [onboarding-dashboard.md](features/onboarding-dashboard.md) | Onboarding Dashboard | skeleton |
 
 Note: the help center is known to lag behind the current app, so treat the
 list above as a starting skeleton, not ground truth — features may have been
@@ -87,3 +93,4 @@ examples of skeleton corrections so far — see [decisions/decision-log.md](deci
 - "Product Recommendations (Upselling)" was listed on the help center but does not exist in the app — removed.
 - "Buy X Get Y", "Quantity Breaks for Same Product Offer", and "Volume Discounts for Subscription Products" were listed as 3 separate articles but are variants of one feature — merged into `quantity-break.md`.
 - "Custom CSS" was listed as its own article, but is actually one shared input field in every offer type's advanced settings, not a standalone offer type — moved to `product/custom-css.md`.
+- The help center is also missing features: QA added "Translate Portal", "Analytics", and "Onboarding Dashboard", which existed in the app but had no article in the category page fetched.

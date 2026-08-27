@@ -17,10 +17,19 @@ those inside `quantity-break.md`, reserve this file for interactions
 
 (Custom CSS is not listed here — it's a shared setting, not an offer type. See [product/custom-css.md](custom-css.md).)
 
+Offer types (can stack/conflict with each other at cart/checkout — the
+interactions this file is mainly for):
 - [Multibuy – Mix & Match Combo](../features/multibuy-mix-match-combo.md)
 - [Wholesale Pricing Offer](../features/wholesale-pricing-offer.md)
 - [Quantity Break](../features/quantity-break.md) (variants: same-product tiers, Buy X Get Y, subscription products)
+
+Other features (config/reporting/onboarding — listed for completeness;
+unlikely to conflict with offer types, but note here if one turns out to):
 - [Variant Swatches](../features/variant-swatches.md)
+- [Translate Offers](../features/translate-offers.md)
+- [Translate Portal](../features/translate-portal.md)
+- [Analytics](../features/analytics.md)
+- [Onboarding Dashboard](../features/onboarding-dashboard.md)
 
 ## Known interactions
 
