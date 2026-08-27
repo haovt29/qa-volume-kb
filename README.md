@@ -85,6 +85,8 @@ corrected and extended by QA directly (see decision-log for each change).
 | [variant-swatches.md](features/variant-swatches.md) | Variant Swatches | skeleton |
 | [analytics.md](features/analytics.md) | Analytics | skeleton |
 | [onboarding-dashboard.md](features/onboarding-dashboard.md) | Onboarding Dashboard | skeleton |
+| [ask-for-review.md](features/ask-for-review.md) | Ask for Review | skeleton |
+| [ai-offer-creation.md](features/ai-offer-creation.md) | AI Offer Creation | skeleton |
 
 Note: the help center is known to lag behind the current app, so treat the
 list above as a starting skeleton, not ground truth — features may have been

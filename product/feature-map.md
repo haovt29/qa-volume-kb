@@ -30,6 +30,8 @@ unlikely to conflict with offer types, but note here if one turns out to):
 - [Translate Portal](../features/translate-portal.md)
 - [Analytics](../features/analytics.md)
 - [Onboarding Dashboard](../features/onboarding-dashboard.md)
+- [Ask for Review](../features/ask-for-review.md)
+- [AI Offer Creation](../features/ai-offer-creation.md) (meta: creates the offer types above — check it produces valid configs for each)
 
 ## Known interactions
 
