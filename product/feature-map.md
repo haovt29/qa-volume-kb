@@ -5,18 +5,20 @@
 Discount features commonly stack or conflict with each other. This file is
 for documenting *cross-feature* rules that don't belong in any single
 feature's file — e.g. "what happens if a customer qualifies for both
-Wholesale Pricing and Buy X Get Y at once?"
+Wholesale Pricing and the Buy X Get Y variant of Quantity Break at once?"
 
-Update this whenever a change to one feature affects another.
+Update this whenever a change to one feature affects another. Note that
+`quantity-break.md` itself has 3 variants (same-product tiers, Buy X Get Y,
+subscription products) that can also interact with *each other* — track
+those inside `quantity-break.md`, reserve this file for interactions
+*across* separate feature files.
 
 ## Features in scope
 
 - [Custom CSS](../features/custom-css.md)
 - [Multibuy – Mix & Match Combo](../features/multibuy-mix-match-combo.md)
 - [Wholesale Pricing Offer](../features/wholesale-pricing-offer.md)
-- [Quantity Breaks for Same Product Offer](../features/quantity-breaks-same-product.md)
-- [Volume Discounts for Subscription Products](../features/volume-discounts-subscription-products.md)
-- [Buy X Get Y](../features/buy-x-get-y.md)
+- [Quantity Break](../features/quantity-break.md) (variants: same-product tiers, Buy X Get Y, subscription products)
 - [Variant Swatches](../features/variant-swatches.md)
 
 ## Known interactions
