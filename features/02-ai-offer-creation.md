@@ -38,8 +38,8 @@ before saving (QVD-161).
   (3 variants), [Multibuy](04-multibuy-mix-match-combo.md), and
   [Wholesale Pricing](05-wholesale-pricing-offer.md) — AI Offer Creation is
   a generator *for* those offer types, not a separate offer type itself.
-- **Usage limits — actual behavior (QA-confirmed, 2026-08-27), differs from
-  QVD-169's written AC — see note below:**
+- **Usage limits — PO-confirmed current behavior (2026-08-27), intentionally
+  differs from QVD-169's written AC:**
   - **Development stores: feature fully disabled/hidden.** A message
     explains it's unavailable on dev stores. (Matches QVD-169 AC.)
   - **Production: capped at 1 use per instance, with no automatic reset**
@@ -55,12 +55,10 @@ before saving (QVD-161).
   - Reason: AI generation costs tokens per request; the app is free, so
     uncapped usage isn't sustainable (QVD-169 background — this rationale
     still holds even though the concrete limit shipped differently).
-  - `Need confirm PO/Dev`: QVD-169's AC says 5/day with UTC-midnight reset;
-    actual shipped behavior is 1/instance with no reset. Was this a
-    deliberate post-ticket change (and if so, is there a follow-up ticket
-    to check), or did the ticket's AC never get fully implemented? Don't
-    write test cases asserting "resets daily" until this is confirmed —
-    current QA-confirmed truth is **no reset**.
+  - **Resolved (2026-08-27):** PO confirmed 1/instance with no reset is the
+    intended current behavior — QVD-169's AC (5/day, UTC-midnight reset)
+    is outdated/superseded, not a bug. Write test cases against 1/instance,
+    no reset, `ai_prompt_limit` Config override — not against the ticket's AC.
 - **Post-save review prompt for AI-created offers (QVD-171) — cross-feature
   link:** saving an AI-generated offer triggers the
   [Ask for Review](09-ask-for-review.md) flow, which does **not** apply to
@@ -156,7 +154,7 @@ See [known-issues.md](../known-issues/known-issues.md) for entries tagged `ai-of
 
 - [QVD-161](https://ownego.atlassian.net/browse/QVD-161) — AI Offer Assistant – Prompt-to-Config Feature, Story — core spec
 - [QVD-165](https://ownego.atlassian.net/browse/QVD-165) — AI entry creation, Epic — **To Do, not started**, no description
-- [QVD-169](https://ownego.atlassian.net/browse/QVD-169) — AI Offer Usage Limit, Story — dev-store block; **AC describes 5/day+UTC-reset, but actual/QA-confirmed behavior is 1/instance with no reset** (see Business Rules); `ai_prompt_limit` Config override documented in a comment
+- [QVD-169](https://ownego.atlassian.net/browse/QVD-169) — AI Offer Usage Limit, Story — dev-store block; AC describes 5/day+UTC-reset, but this is **outdated — PO-confirmed current behavior is 1/instance, no reset** (see Business Rules); `ai_prompt_limit` Config override documented in a comment
 - [QVD-171](https://ownego.atlassian.net/browse/QVD-171) — Ask for review for AI-created offer, Story — cross-ref, see [09-ask-for-review.md](09-ask-for-review.md)
 - [QVD-173](https://ownego.atlassian.net/browse/QVD-173) — [BE] Update AI offer analytics, Task — backend for QVD-171's review funnel, cross-ref
 - [QVD-179](https://ownego.atlassian.net/browse/QVD-179) — Sidekick app extension — UI for AI Data-Response Cards, Story — **In Progress**, related but distinct AI surface
