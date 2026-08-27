@@ -15,7 +15,8 @@ those inside `quantity-break.md`, reserve this file for interactions
 
 ## Features in scope
 
-- [Custom CSS](../features/custom-css.md)
+(Custom CSS is not listed here — it's a shared setting, not an offer type. See [product/custom-css.md](custom-css.md).)
+
 - [Multibuy – Mix & Match Combo](../features/multibuy-mix-match-combo.md)
 - [Wholesale Pricing Offer](../features/wholesale-pricing-offer.md)
 - [Quantity Break](../features/quantity-break.md) (variants: same-product tiers, Buy X Get Y, subscription products)

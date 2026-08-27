@@ -16,6 +16,10 @@ _TODO: fill in via /analysis against related Jira tickets._
 
 _TODO_
 
+## Advanced Settings
+
+Shares the [Custom CSS](../product/custom-css.md) input field with other offer types.
+
 ## Known Issues
 
 See [known-issues.md](../known-issues/known-issues.md) for entries tagged `multibuy-mix-match-combo`.

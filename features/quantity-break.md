@@ -47,6 +47,10 @@ subscription purchase options (interval, first-order vs recurring price, etc.).
 _TODO — rules that apply across all three variants (e.g. how thresholds are
 counted, rounding, currency handling, how UI selects which variant applies)._
 
+## Advanced Settings
+
+Shares the [Custom CSS](../product/custom-css.md) input field with other offer types.
+
 ## Known Issues
 
 See [known-issues.md](../known-issues/known-issues.md) for entries tagged

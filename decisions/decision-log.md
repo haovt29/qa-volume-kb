@@ -44,3 +44,18 @@ shared business rules 3 times and risking drift between copies. Named the
 umbrella "Quantity Break" rather than "Volume Discounts" to avoid ambiguity
 with the app/project name ("Volume").
 **Source:** QA, direct confirmation in conversation.
+
+## 2026-08-27 — Moved Custom CSS from features/ to product/
+
+**Decision:** moved `features/custom-css.md` to `product/custom-css.md`, and
+added an "Advanced Settings" cross-link to it from
+`multibuy-mix-match-combo.md`, `wholesale-pricing-offer.md`, and
+`quantity-break.md`.
+**Why:** QA confirmed Custom CSS is not its own offer type — it's a single
+shared input field present in the advanced settings of at least Multibuy,
+Wholesale Pricing, and Quantity Break. Treating it as a peer feature file
+implied it had its own trigger/business-rule the way an offer type does,
+which is misleading. `product/` is reserved for cross-cutting docs (glossary,
+feature-map), so a setting shared across offer types belongs there, not in
+`features/`.
+**Source:** QA, direct confirmation in conversation.

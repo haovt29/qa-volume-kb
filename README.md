@@ -25,6 +25,7 @@ product/
   overview.md          what the app does, at a glance
   glossary.md           terms used inconsistently elsewhere
   feature-map.md         cross-feature interactions (stacking, conflicts)
+  custom-css.md           shared setting used across offer types, not an offer type itself
 features/
   <feature-slug>.md      one file per feature/module
 testing/
@@ -73,7 +74,6 @@ Full editing conventions for agents are in [AGENTS.md](AGENTS.md).
 
 | File | Topic | Status |
 |---|---|---|
-| [custom-css.md](features/custom-css.md) | Custom CSS | skeleton |
 | [multibuy-mix-match-combo.md](features/multibuy-mix-match-combo.md) | Multibuy – Mix & Match Combo | skeleton |
 | [wholesale-pricing-offer.md](features/wholesale-pricing-offer.md) | Wholesale Pricing Offer | skeleton |
 | [quantity-break.md](features/quantity-break.md) | Quantity Break (variants: same-product tiers, Buy X Get Y, subscription products) | skeleton |
@@ -86,3 +86,4 @@ added, changed, or removed since those articles were last updated. Confirmed
 examples of skeleton corrections so far — see [decisions/decision-log.md](decisions/decision-log.md):
 - "Product Recommendations (Upselling)" was listed on the help center but does not exist in the app — removed.
 - "Buy X Get Y", "Quantity Breaks for Same Product Offer", and "Volume Discounts for Subscription Products" were listed as 3 separate articles but are variants of one feature — merged into `quantity-break.md`.
+- "Custom CSS" was listed as its own article, but is actually one shared input field in every offer type's advanced settings, not a standalone offer type — moved to `product/custom-css.md`.
