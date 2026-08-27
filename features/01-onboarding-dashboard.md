@@ -6,8 +6,7 @@ One screen serving two states, confirmed by QA (2026-08-27) as a single
 feature rather than two: the Home screen shows an **onboarding/empty state**
 for merchants with zero offers, and switches to a **dashboard** once the
 merchant has at least one offer. Analyzed against Jira 2026-08-27 (QVD-14,
-QVD-18, QVD-27, QVD-115, QVD-135) — see `/analysis` output referenced in
-Related Jira Tickets below for the full requirement-analysis writeup.
+QVD-18, QVD-27, QVD-31, QVD-115, QVD-135) — see Related Jira Tickets below.
 
 ## Purpose
 
@@ -42,6 +41,25 @@ be visible immediately after install (QVD-135) — this is not just a UX nice-to
   3. **Recent Offers Table** — Name (editable), Status, Trigger, Combination,
      Actions (view/edit/duplicate/delete), paginated. "Manage offers" and
      "Create offer" buttons for navigation.
+- **"Enable theme app extension" banner behavior (QVD-31):** by default,
+  creating an offer does **not** make it visible on the storefront — the
+  merchant must separately enable the Theme App Extension. Specifically:
+  - Banner (type: Warning) appears on the dashboard page **specifically
+    after a merchant creates an offer, if the extension is not yet
+    enabled** — this is the concrete trigger for the Theme Extension
+    Status / Setup Guide step 2 UI, not just "dashboard state" generally.
+  - Copy: title "Important: Enable theme app extension to display app on
+    your store"; message "To display the offer widget on your store,
+    please enable the Theme App Extension. If not enabled, customers
+    won't see your offer, which may reduce campaign visibility and
+    engagement."; button "Enable Theme App Extension".
+  - Clicking the button: redirects to the Shopify **Theme Editor in a new
+    tab**, auto-selects "the correct theme", auto-inserts the app block
+    ("Qikify: Volume Discount") into the relevant section (typically
+    product page), and instructs the merchant to click **Save** to apply.
+    `Need confirm PO/Dev`: which theme is "the correct theme" when a store
+    has multiple themes (published/live theme, presumably) — matters if a
+    merchant has draft/unpublished themes.
 - **Dashboard ATC click stat (QVD-115):** shows add-to-cart click count for
   the last 30 days. **Cross-reference:** this metric functionally overlaps
   with the standalone [Analytics feature](08-analytics.md) — treat as "a
@@ -68,6 +86,14 @@ be visible immediately after install (QVD-135) — this is not just a UX nice-to
 - Multiple staff accounts on the same store viewing Home simultaneously —
   is onboarding/dashboard state store-level (expected) or could it show
   inconsistently per session?
+- Store with multiple themes (published + drafts) — does "Enable Theme App
+  Extension" auto-select the published/live theme, or could it target the
+  wrong one (QVD-31)?
+- Merchant clicks "Enable Theme App Extension", the new tab opens to Theme
+  Editor, but the merchant closes it or navigates away **without** clicking
+  Save — does the banner/status correctly reflect "still not enabled"?
+- Extension already enabled when the merchant creates their first offer —
+  does the warning banner correctly not appear at all?
 
 ## Risks (from /analysis, 2026-08-27)
 
@@ -91,6 +117,10 @@ the UI manually (Playwright MCP browser-driven only, no
 - Theme Extension Status accuracy: verifiable via UI, but needs a test
   store/theme where the extension can be deliberately toggled — may need
   Dev/Support help to set up.
+- "Enable Theme App Extension" deep link (QVD-31): fully verifiable via UI —
+  click button, confirm it opens Theme Editor in a new tab with the app
+  block ("Qikify: Volume Discount") pre-inserted into the expected section,
+  and that saving there flips the dashboard's status to Active on return.
 - ATC click count (QVD-115): correctness of the underlying computation is
   not verifiable from the UI alone (would need real storefront ATC events
   or log/dev access) — at most, smoke-test that a number renders.
@@ -106,6 +136,7 @@ See [known-issues.md](../known-issues/known-issues.md) for entries tagged `onboa
 - [QVD-14](https://ownego.atlassian.net/browse/QVD-14) — Onboarding (MVP version), Epic
 - [QVD-18](https://ownego.atlassian.net/browse/QVD-18) — Onboarding (MVP version), Story — AC + UX requirement
 - [QVD-27](https://ownego.atlassian.net/browse/QVD-27) — Dashboard page (MVP), Epic — 3-section layout
+- [QVD-31](https://ownego.atlassian.net/browse/QVD-31) — Enable theme app extension, Story — banner behavior + auto-insert deep link
 - [QVD-115](https://ownego.atlassian.net/browse/QVD-115) — Update dashboard/home page — adds ATC click stat
 - [QVD-135](https://ownego.atlassian.net/browse/QVD-135) — [B4S update] Onboarding — Shopify review requirement
 
