@@ -38,16 +38,29 @@ before saving (QVD-161).
   (3 variants), [Multibuy](04-multibuy-mix-match-combo.md), and
   [Wholesale Pricing](05-wholesale-pricing-offer.md) — AI Offer Creation is
   a generator *for* those offer types, not a separate offer type itself.
-- **Usage limits (QVD-169):**
+- **Usage limits — actual behavior (QA-confirmed, 2026-08-27), differs from
+  QVD-169's written AC — see note below:**
   - **Development stores: feature fully disabled/hidden.** A message
-    explains it's unavailable on dev stores.
-  - **Production stores: capped at 5 uses/day**, reset at **midnight UTC**.
-    Once reached, "Generate offer" is disabled with a message that the
-    daily limit was hit.
-  - Remaining uses shown in the UI, e.g. "Daily usage limit: 3/5".
-  - **Limit is per store, not per staff account.**
+    explains it's unavailable on dev stores. (Matches QVD-169 AC.)
+  - **Production: capped at 1 use per instance, with no automatic reset**
+    (not the 5-uses/day-reset-at-midnight-UTC that QVD-169's AC describes).
+    Once the 1 use is spent, the merchant cannot generate again unless an
+    admin raises the limit (see below).
+  - **To grant more uses:** an admin adds `"ai_prompt_limit": 10` (or
+    another number) to that store's **Config** in the Admin page — this
+    is the actual mechanism for both raising a merchant's limit in
+    production and for QA testing, not just a QA-only bypass.
+  - **Limit is per store/instance, not per staff account** (this part
+    matches QVD-169 AC).
   - Reason: AI generation costs tokens per request; the app is free, so
-    uncapped usage isn't sustainable (QVD-169 background).
+    uncapped usage isn't sustainable (QVD-169 background — this rationale
+    still holds even though the concrete limit shipped differently).
+  - `Need confirm PO/Dev`: QVD-169's AC says 5/day with UTC-midnight reset;
+    actual shipped behavior is 1/instance with no reset. Was this a
+    deliberate post-ticket change (and if so, is there a follow-up ticket
+    to check), or did the ticket's AC never get fully implemented? Don't
+    write test cases asserting "resets daily" until this is confirmed —
+    current QA-confirmed truth is **no reset**.
 - **Post-save review prompt for AI-created offers (QVD-171) — cross-feature
   link:** saving an AI-generated offer triggers the
   [Ask for Review](09-ask-for-review.md) flow, which does **not** apply to
@@ -92,16 +105,17 @@ before saving (QVD-161).
 - Dev store merchant somehow reaches the Generate flow via a stale
   URL/direct link — confirm the block is enforced server-side, not just
   UI-hidden.
-- Merchant hits the 5/day production limit mid-session, e.g. after
-  starting to edit a previously-generated offer — does the *editing* count
-  against the limit, or only new generations?
-- Limit resets at UTC midnight — store in a very different timezone
-  (e.g. UTC+12) sees the reset at a locally odd time — confirm this is
-  intentional (per QVD-169 AC, it is: "reset at midnight UTC") rather than
-  a localization gap, but worth a UI-copy check that it doesn't claim
-  "resets at midnight" without the UTC qualifier.
-- QA needs to exceed the 5/day limit for testing — **see Testability Notes,
-  there's a documented bypass**, don't file this as a blocker bug.
+- Merchant hits the 1-use limit mid-session, e.g. after starting to edit a
+  previously-generated offer — does the *editing* count against the limit,
+  or only new generations? `Need confirm`.
+- Merchant reaches the limit and has no way to get more without an admin
+  manually raising `ai_prompt_limit` in Config — confirm the UI message
+  shown when limit-reached doesn't imply a reset is coming (it doesn't
+  reset), so it doesn't mislead the merchant into waiting.
+- Admin raises `ai_prompt_limit` to N — confirm the merchant's remaining-use
+  counter (if shown in UI) reflects the new N, not the original 1.
+- QA needs more than 1 generation for testing — **see Testability Notes**,
+  raise `ai_prompt_limit` in Config, don't file running out as a blocker bug.
 
 ## Testability Notes
 
@@ -109,13 +123,17 @@ Per [`qikify-volume.md` QA app note](../dev-references/references.md): no
 API access for QA automation — verify via UI (Playwright MCP) unless noted
 otherwise below.
 
-- **QA bypass for the 5/day limit (from QVD-169, dev comment):** in the
-  Admin page for the relevant user, enable **"Test"** to allow prompting
-  regardless of the limit, and/or add `ai_prompt_limit: xxx` to that user's
-  **Config** to raise the allowed prompt count. Use this to test both
-  under-limit and at-limit/over-limit behavior without waiting for a daily
-  reset. **This is admin/config-level access, not pure UI** — note that in
-  automation-constraint terms even though it's not the app's own API.
+- **Raising the limit for testing (QA-confirmed 2026-08-27, also
+  documented in a QVD-169 dev comment):** in the Admin page for the
+  relevant user/store, add `"ai_prompt_limit": 10` (or another number) to
+  **Config** to raise the allowed prompt count above the default of 1.
+  Since there's no daily reset, this is the *only* way to test
+  at-limit/over-limit and multi-generation scenarios — there's no waiting
+  it out. The QVD-169 comment also mentions an Admin **"Test"** toggle;
+  confirm whether that's still needed alongside `ai_prompt_limit` or was
+  superseded by it. **This is admin/config-level access, not pure UI** —
+  note that in automation-constraint terms even though it's not the app's
+  own API.
 - Dev-store blocking: needs an actual Shopify development store to verify
   (not just a flag) — confirm test store type before relying on this check.
 - `isAiGenerated` persistence through preview→edit→save (QVD-171 requirement,
@@ -138,7 +156,7 @@ See [known-issues.md](../known-issues/known-issues.md) for entries tagged `ai-of
 
 - [QVD-161](https://ownego.atlassian.net/browse/QVD-161) — AI Offer Assistant – Prompt-to-Config Feature, Story — core spec
 - [QVD-165](https://ownego.atlassian.net/browse/QVD-165) — AI entry creation, Epic — **To Do, not started**, no description
-- [QVD-169](https://ownego.atlassian.net/browse/QVD-169) — AI Offer Usage Limit, Story — dev-store block + 5/day production cap; QA bypass documented in a comment
+- [QVD-169](https://ownego.atlassian.net/browse/QVD-169) — AI Offer Usage Limit, Story — dev-store block; **AC describes 5/day+UTC-reset, but actual/QA-confirmed behavior is 1/instance with no reset** (see Business Rules); `ai_prompt_limit` Config override documented in a comment
 - [QVD-171](https://ownego.atlassian.net/browse/QVD-171) — Ask for review for AI-created offer, Story — cross-ref, see [09-ask-for-review.md](09-ask-for-review.md)
 - [QVD-173](https://ownego.atlassian.net/browse/QVD-173) — [BE] Update AI offer analytics, Task — backend for QVD-171's review funnel, cross-ref
 - [QVD-179](https://ownego.atlassian.net/browse/QVD-179) — Sidekick app extension — UI for AI Data-Response Cards, Story — **In Progress**, related but distinct AI surface
