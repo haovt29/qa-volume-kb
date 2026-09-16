@@ -106,6 +106,22 @@ API access — verify via UI. Practical notes specific to this feature:
   offer — combine with [AI Offer Creation](02-ai-offer-creation.md)'s QA
   bypass (Admin "Test" toggle / `ai_prompt_limit` config) to generate one
   without burning the 5/day limit.
+- **Blocked live 2026-09-14 on `test-vl-1`:** attempted to reach this
+  overlay by first generating an AI offer, via
+  `/apps/staging-bk-volume/offers/create`. Hit the same block already
+  documented in [AI Offer Creation](02-ai-offer-creation.md): `test-vl-1`
+  is a **development store**, and the AI offer assistant is **fully
+  disabled** there ("Not available on development stores. The AI offer
+  assistant is only available on production stores.") — confirmed via a
+  fresh screenshot of the Create Offer page, template cards only, no AI
+  prompt UI at all. This is a **hard UI-level gate unrelated to
+  `ai_prompt_limit`** — raising that Config value doesn't help, since the
+  block happens before the limit even applies. **This whole feature's
+  overlay (star selection, both branches, terminal-event exclusivity,
+  every edge case listed above) remains entirely untested against real
+  UI** — needs either a production store, or Dev/Support access to
+  directly flag an offer `isAiGenerated` for QA purposes, neither
+  available in this session.
 
 ## Known Issues
 
@@ -120,3 +136,5 @@ See [known-issues.md](../known-issues/known-issues.md) for entries tagged `ask-f
 
 - Jira (QVD project), via Atlassian MCP, analyzed 2026-08-27.
 - QA, direct confirmation in conversation (2026-08-27) — feature exists (original scope guess corrected during analysis, see note at top).
+- Live Playwright MCP attempt, `test-vl-1`, 2026-09-14 — blocked by the
+  dev-store gate on AI Offer Creation; see Testability Notes.

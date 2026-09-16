@@ -77,16 +77,16 @@ corrected and extended by QA directly (see decision-log for each change).
 
 | # | File | Topic | Status |
 |---|---|---|---|
-| 1 | [01-onboarding-dashboard.md](features/01-onboarding-dashboard.md) | Onboarding Dashboard | skeleton |
-| 2 | [02-ai-offer-creation.md](features/02-ai-offer-creation.md) | AI Offer Creation | skeleton |
-| 3 | [03-quantity-break.md](features/03-quantity-break.md) | Quantity Break (variants: same-product tiers, Buy X Get Y, subscription products) | skeleton |
-| 4 | [04-multibuy-mix-match-combo.md](features/04-multibuy-mix-match-combo.md) | Multibuy – Mix & Match Combo | skeleton |
-| 5 | [05-wholesale-pricing-offer.md](features/05-wholesale-pricing-offer.md) | Wholesale Pricing Offer | skeleton |
-| 6 | [06-variant-swatches.md](features/06-variant-swatches.md) | Variant Swatches | skeleton |
-| 7 | [07-translate-offers.md](features/07-translate-offers.md) | Translate Offers | skeleton |
-| 8 | [08-analytics.md](features/08-analytics.md) | Analytics | skeleton |
-| 9 | [09-ask-for-review.md](features/09-ask-for-review.md) | Ask for Review | skeleton |
-| 10 | [10-translate-portal.md](features/10-translate-portal.md) | Translate Portal (8 languages listed, QA said 9 — needs confirmation) | in-review |
+| 1 | [01-onboarding-dashboard.md](features/01-onboarding-dashboard.md) | Onboarding Dashboard | in-review |
+| 2 | [02-ai-offer-creation.md](features/02-ai-offer-creation.md) | AI Offer Creation | in-review |
+| 3 | [03-quantity-break.md](features/03-quantity-break.md) | Quantity Break (variants: same-product tiers, Buy X Get Y, subscription products) | in-review |
+| 4 | [04-multibuy-mix-match-combo.md](features/04-multibuy-mix-match-combo.md) | Multibuy – Mix & Match Combo | in-review |
+| 5 | [05-wholesale-pricing-offer.md](features/05-wholesale-pricing-offer.md) | Wholesale Pricing Offer | in-review |
+| 6 | [06-variant-swatches.md](features/06-variant-swatches.md) | Variant Swatches | in-review |
+| 7 | [07-translate-offers.md](features/07-translate-offers.md) | Translate Offers (offer/widget content shown on the SDK/storefront) | in-review |
+| 8 | [08-analytics.md](features/08-analytics.md) | Analytics | in-review |
+| 9 | [09-ask-for-review.md](features/09-ask-for-review.md) | Ask for Review | in-review |
+| 10 | [10-translate-portal.md](features/10-translate-portal.md) | Translate Portal (merchant-facing Portal UI) | in-review |
 
 Note: the help center is known to lag behind the current app, so treat the
 list above as a starting skeleton, not ground truth — features may have been

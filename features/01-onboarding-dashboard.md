@@ -26,8 +26,11 @@ be visible immediately after install (QVD-135) — this is not just a UX nice-to
 - **Trigger condition:** onboarding view shows automatically only for
   first-time users with **zero existing offers**. Once a merchant has ≥1
   offer, onboarding no longer shows automatically — the dashboard view takes
-  over (QVD-18 AC). `Need confirm PO/Dev`: does "existing offers" count any
-  offer regardless of status (draft/paused/expired), or active only?
+  over (QVD-18 AC). **Resolved (QA confirmed 2026-08-28):** "existing
+  offers" counts any offer regardless of status (paused/expired, etc. —
+  note: offers have **no "draft" status** in this app), not active only —
+  consistent with the "Recently created offers" list, which also shows
+  offers of any status.
 - **B4S requirement (QVD-135):** onboarding must render on the Home screen
   immediately post-install, with a step-by-step setup guide and clear
   primary CTAs — this was a direct fix for a Shopify review flag, so
@@ -38,9 +41,11 @@ be visible immediately after install (QVD-135) — this is not just a UX nice-to
 - **Dashboard view contents (QVD-27),** 3 sections:
   1. **Theme Extension Status** — see detailed spec below (QVD-66).
   2. **Setup Guide** — see detailed spec below (QVD-65).
-  3. **Recent Offers Table** — Name (editable), Status, Trigger, Combination,
-     Actions (view/edit/duplicate/delete), paginated. "Manage offers" and
-     "Create offer" buttons for navigation.
+  3. **"Recently created offers"** — **corrected per QA (2026-08-28), differs
+     from QVD-27's spec:** lists the **5 most recently created offers**,
+     regardless of status (not the paginated table with Name/Status/Trigger/
+     Combination/Actions columns that QVD-27 originally specified). "Manage
+     offers" and "Create offer" buttons for navigation.
 - **Theme Extension Status block — current behavior (QVD-66, supersedes the
   QVD-31 banner):** a **permanent** block on the dashboard page (always
   visible, regardless of offer/extension state) showing whether offers are
@@ -63,9 +68,8 @@ be visible immediately after install (QVD-135) — this is not just a UX nice-to
     Editor in a new tab**, auto-selects "the correct theme", auto-inserts
     the app block ("Qikify: Volume Discount") into the relevant section
     (typically product page), and instructs the merchant to click **Save**
-    to apply. `Need confirm PO/Dev`: which theme counts as "the correct
-    theme" when a store has multiple themes (published/live theme,
-    presumably) — matters if a merchant has draft/unpublished themes.
+    to apply. **Resolved (QA confirmed 2026-08-28):** "the correct theme"
+    = the theme currently active/published on the storefront.
 - **Setup Guide — current behavior (QVD-65):**
   - Progress tracker at the top (e.g. "1/2 completed"), updates dynamically
     as steps complete. **Resolved** (was a `Need confirm` before QVD-65 was
@@ -89,36 +93,51 @@ be visible immediately after install (QVD-135) — this is not just a UX nice-to
 ## Edge Cases
 
 - Merchant with 0 offers → onboarding shown. Merchant creates their first
-  offer → does the view switch to dashboard immediately/on next load, or
-  require a manual refresh/navigation? `Need confirm`.
-- Merchant deletes their only offer, returning to 0 offers — does onboarding
-  reappear? Not specified in tickets. `Need confirm PO/Dev` — **Blocker**,
-  this directly affects whether "onboarding never shows twice" is even true.
-- Reinstall: does prior offer data (and thus onboarding-skip state) persist,
-  or does a reinstalled store see onboarding again? `Need confirm`.
+  offer → **Resolved (QA confirmed 2026-08-28):** creating the offer does
+  **not** auto-redirect to Home/Dashboard — the merchant stays on the offer
+  settings page. The switch to Dashboard only happens the next time the
+  merchant navigates back to Home themselves.
+- Merchant deletes their only offer, returning to 0 offers — **Resolved (QA
+  confirmed 2026-08-28):** onboarding does **not** reappear; once a store
+  has ever had ≥1 offer, the dashboard view persists even after all offers
+  are deleted.
+- Reinstall: **Resolved (QA confirmed 2026-08-28):** depends on whether the
+  store instance ever created an offer. If the instance never created an
+  offer before, onboarding shows again after reinstall. If it previously
+  created an offer (even one later deleted), onboarding stays hidden and
+  the dashboard shows instead.
 - Theme app extension toggled from the Shopify theme editor directly
-  (outside this app) — does the Theme Extension Status block reflect it
-  without any action inside the app?
+  (outside this app) — **Resolved (QA confirmed 2026-08-28):** yes, the
+  Theme Extension Status block reflects it without any action inside the
+  app.
 - Store name with unusual values (very long, special characters, emoji) in
   "Hello {{Store name}}!" header — truncation/overflow.
-- Large number of offers — Recent Offers Table pagination boundaries.
-- Rapid repeated clicks on "Create offer" CTA during page load.
+- Large number of offers — since "Recently created offers" caps at 5 (not
+  paginated, per correction above), confirm it always shows the 5 *most
+  recent* and drops older ones as new offers are created.
+- Rapid repeated clicks on "Create offer" CTA — **Resolved (QA confirmed
+  2026-08-28):** not applicable/no risk — the first click already
+  navigates away to the offer-type selection page, so there's no window
+  for a second click to register on the same button.
 - Multiple staff accounts on the same store viewing Home simultaneously —
-  is onboarding/dashboard state store-level (expected) or could it show
-  inconsistently per session?
-- Store with multiple themes (published + drafts) — does "Enable theme app"
-  auto-select the published/live theme, or could it target the wrong one
-  (QVD-31 mechanism, still in use via QVD-66's block / QVD-65's step 2)?
+  **Resolved (QA confirmed 2026-08-28):** state is store-wide but not
+  push/live-updated. If staff A creates an offer while staff B already has
+  Home open, staff B keeps seeing Onboarding until they **reload** — no
+  automatic real-time switch.
+- Store with multiple themes (published + drafts) — **Resolved (QA
+  confirmed 2026-08-28):** "Enable theme app" targets the theme currently
+  active/published on the storefront (see Business Rules above). Still
+  worth a regression check that it never targets a draft/unpublished theme.
 - Merchant clicks "Enable theme app"/"Enable theme app extension", the new
   tab opens to Theme Editor, but the merchant closes it or navigates away
-  **without** clicking Save — does the status block correctly still show
-  "Inactive"?
+  **without** clicking Save — **Resolved (QA confirmed 2026-08-28):** yes,
+  the status block correctly still shows "Inactive".
 - **Regression check:** does the old QVD-31 warning banner ever reappear
   alongside the QVD-66 permanent status block? It was explicitly removed as
   redundant — if both show, that's a bug, not a feature.
-- Both Setup Guide steps completed — confirm tracker shows "2/2 completed"
-  and the guide actually collapses (QVD-65 AC); does it stay collapsed on
-  next visit, or can it be re-expanded?
+- Both Setup Guide steps completed — **Resolved (QA confirmed 2026-08-28):**
+  tracker shows "2/2 completed" and the guide collapses by default; the
+  merchant can click to expand it again to view the steps.
 
 ## Risks (from /analysis, 2026-08-27)
 
@@ -129,7 +148,10 @@ be visible immediately after install (QVD-135) — this is not just a UX nice-to
   correctly poll/sync the real Shopify theme editor state, merchants could
   be misled about whether their offers are actually live on the storefront.
 - **Medium — onboarding/dashboard trigger edge cases:** the 0-vs-≥1-offer
-  binary condition has real consequences both directions (see Edge Cases).
+  binary condition (now resolved: any status counts, deletion doesn't
+  revert to onboarding) still has real regression consequences both
+  directions — worth solid coverage even though the ambiguity is gone (see
+  Edge Cases).
 
 ## Testability Notes
 

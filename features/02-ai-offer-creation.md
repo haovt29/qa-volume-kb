@@ -26,6 +26,9 @@ before saving (QVD-161).
     20% off for 3", "Wholesale tiers: 20+ units 10% off, 50+ units 20% off,
     100+ units 30% off".
   - Character counter + hint text "We'll detect the type & fill the config".
+  - **Usage counter (QA confirmed 2026-08-28):** panel shows live usage vs.
+    limit, e.g. `AI generations: 10/50` — reflects whatever
+    `ai_prompt_limit` is currently set to (default 1 in production).
   - Prompt can be in **any language** (per QVD-161 overview — cross-check
     against [Translate Portal](10-translate-portal.md) scope, which is
     about translating the portal UI, not prompt language handling; these
@@ -74,10 +77,10 @@ before saving (QVD-161).
   of its 3 use cases (1C — planning suggestion) ends with a CTA that
   deep-links into **this** AI Offer Creation flow with pre-filled data
   ("Create this offer in Qikify" → opens the settings page with filled
-  data). `Need confirm PO/Dev`: is Sidekick data-response-cards a sub-part
-  of "AI Offer Creation" for KB/test purposes, or should it become its own
-  feature file once shipped? Flagging rather than deciding unilaterally —
-  see Edge Cases.
+  data). **On hold (per Dev, 2026-08-28):** still mid-coding, flow not
+  stable yet — don't analyze/test this sub-part further until Dev signals
+  it's ready; revisit the "own feature file vs sub-part of AI Offer
+  Creation" question at that point.
 - **Not yet built — "AI entry creation" (QVD-165, Epic, status: To Do):** no
   description on the ticket; status shows this hasn't started. Don't treat
   anything about additional AI "entry points" as current behavior until
@@ -86,32 +89,48 @@ before saving (QVD-161).
 ## Edge Cases
 
 - Prompt is empty, gibberish, or doesn't map to any of the 5 offer types —
-  what does "Generate offer" do? `Need confirm PO/Dev`.
+  **Resolved (QA confirmed 2026-08-28):** a warning banner shows for
+  gibberish/unmappable prompts; for empty prompt or prompt **< 5
+  characters**, the "Generate offer" button is disabled instead (can't
+  even submit).
 - Prompt is ambiguous between two offer types (e.g. could read as either
-  Quantity Break or Wholesale Pricing) — which wins, or does it ask for
-  clarification? `Need confirm`.
-- Prompt near/over the 2,000-character limit — hard cutoff vs validation
-  error.
+  Quantity Break or Wholesale Pricing) — **Resolved (QA confirmed
+  2026-08-28):** no clarification step; the AI picks based on the prompt
+  and an internal "closest-matching offer type" priority rule (no further
+  detail on the rule's exact logic — treat as a black box, test by
+  observed output on ambiguous prompts).
+- Prompt near/over the 2,000-character limit — **Resolved (QA confirmed
+  2026-08-28):** hard cutoff at 2,000 characters (can't type past it).
 - Prompt requests something outside the 5 supported offer types (e.g. a
-  feature that doesn't exist) — expected to fail gracefully, not
-  hallucinate a nonexistent config. `Need confirm` how this is surfaced.
-- Merchant edits the AI-generated config before saving — does the
-  `isAiGenerated` flag (QVD-171) still persist, so the review prompt still
-  fires? QVD-171 explicitly says yes ("persists whether the merchant
-  creates the offer directly from Summary, or previews and edits it
-  first") — worth a dedicated regression test since it's easy to break.
+  feature that doesn't exist) — **Resolved (QA confirmed 2026-08-28):** a
+  warning banner shows (same mechanism as the unmappable-prompt case
+  above), not a hallucinated config.
+- Merchant edits the AI-generated config before saving — **Resolved (QA
+  confirmed 2026-08-28):** yes, `isAiGenerated` (QVD-171) still persists —
+  it's saved into the offer data itself, not derived from the edit path —
+  so the review prompt still fires. Still worth a dedicated regression
+  test since it's easy to break (e.g. if a future refactor overwrites the
+  flag on edit).
 - Dev store merchant somehow reaches the Generate flow via a stale
-  URL/direct link — confirm the block is enforced server-side, not just
-  UI-hidden.
+  URL/direct link — **Resolved (QA confirmed 2026-08-28):** UI is hidden
+  and a banner explains the feature is only available on real (non-dev)
+  stores. **Note:** this confirms the *UI-level* behavior only — QA has
+  not separately verified server-side enforcement (i.e. whether the
+  underlying generate request would also be rejected if called directly,
+  bypassing the UI). Worth a dedicated check if/when API-level testing
+  becomes possible.
 - Merchant hits the 1-use limit mid-session, e.g. after starting to edit a
-  previously-generated offer — does the *editing* count against the limit,
-  or only new generations? `Need confirm`.
+  previously-generated offer — **Resolved (QA confirmed 2026-08-28):**
+  yes, editing/regenerating a previously-generated offer also counts
+  against the limit (not just brand-new generations).
 - Merchant reaches the limit and has no way to get more without an admin
-  manually raising `ai_prompt_limit` in Config — confirm the UI message
-  shown when limit-reached doesn't imply a reset is coming (it doesn't
-  reset), so it doesn't mislead the merchant into waiting.
-- Admin raises `ai_prompt_limit` to N — confirm the merchant's remaining-use
-  counter (if shown in UI) reflects the new N, not the original 1.
+  manually raising `ai_prompt_limit` in Config — **Resolved (QA confirmed
+  2026-08-28):** UI shows a "limit reached" message and disables the
+  prompt input field — doesn't imply a reset is coming.
+- Admin raises `ai_prompt_limit` to N — **Resolved (QA confirmed
+  2026-08-28):** the UI shows a live counter reflecting the new limit,
+  e.g. `AI generations: 10/50` when the limit is raised to 50 and the
+  merchant has used 10.
 - QA needs more than 1 generation for testing — **see Testability Notes**,
   raise `ai_prompt_limit` in Config, don't file running out as a blocker bug.
 
