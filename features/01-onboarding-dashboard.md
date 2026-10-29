@@ -155,10 +155,11 @@ be visible immediately after install (QVD-135) — this is not just a UX nice-to
 
 ## Testability Notes
 
-Per [`qikify-volume.md` QA app note](../dev-references/references.md): **no
-API access for QA automation** — everything here must be verified through
-the UI manually (Playwright MCP browser-driven only, no
-`APIRequestContext`). Practical implications:
+Per [`qikify-volume.md` QA app note](../dev-references/references.md):
+QA **may use API** (changed 2026-10-29 — see decision-log) — both reading
+the Portal's own network requests and calling endpoints directly. UI stays
+the oracle for user-facing results; API is for setup and for state the UI
+doesn't show. Practical implications:
 - Onboarding↔dashboard switching: verifiable via UI (create/delete test
   offers, reload Home).
 - Theme Extension Status accuracy: verifiable via UI, but needs a test

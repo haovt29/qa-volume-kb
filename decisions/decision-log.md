@@ -207,3 +207,18 @@ corroborates the previous entry's correction (two genuinely separate
 features) with hands-on evidence, not just QA's say-so.
 **Source:** Jira QVD-159 (Sprint 23 goal field, via Atlassian MCP) + live
 Playwright MCP session against `test-vl-1`'s Portal Dashboard, 2026-09-14.
+
+## 2026-10-29 — QA may use API for Volume (supersedes the earlier "no API access" constraint)
+
+**Decision:** QA may use API for Qikify Volume, both by reading the Portal's/
+storefront's own network requests and by calling endpoints directly
+(Playwright `APIRequestContext`, curl). Testability notes in `features/01`,
+`02`, `09` and `dev-references/references.md` updated to match.
+**Why:** QA confirmed it directly. UI remains the oracle for user-facing
+expected results; API is for test-data setup and for verifying state the UI
+doesn't show (persisted translations, usage counters, job status, backend
+enforcement). Endpoints/auth aren't documented yet — take them from network
+traffic or ask Dev; don't invent them. Existing "not verifiable from the UI
+alone" notes (e.g. analytics in `09`) are not automatically resolved — only
+where an endpoint actually exposes that state.
+**Source:** QA, in conversation during QVD-201 analysis, 2026-10-29.

@@ -136,9 +136,10 @@ before saving (QVD-161).
 
 ## Testability Notes
 
-Per [`qikify-volume.md` QA app note](../dev-references/references.md): no
-API access for QA automation — verify via UI (Playwright MCP) unless noted
-otherwise below.
+Per [`qikify-volume.md` QA app note](../dev-references/references.md): QA
+may use API (network + direct calls, changed 2026-10-29 — see decision-log)
+for setup and non-UI state; verify user-facing results via UI (Playwright
+MCP) unless noted otherwise below.
 
 - **Raising the limit for testing (QA-confirmed 2026-08-27, also
   documented in a QVD-169 dev comment):** in the Admin page for the

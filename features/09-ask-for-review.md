@@ -91,8 +91,10 @@ experience — and route unhappy merchants to support instead of a public
 
 ## Testability Notes
 
-Per [`qikify-volume.md` QA app note](../dev-references/references.md): no
-API access — verify via UI. Practical notes specific to this feature:
+Per [`qikify-volume.md` QA app note](../dev-references/references.md): QA
+may use API (network + direct calls, changed 2026-10-29 — see decision-log);
+user-facing behavior is still verified via UI. Practical notes specific to
+this feature:
 - The overlay flow itself (star selection, both branches, copy/feedback
   actions) is fully UI-testable.
 - **Not verifiable from the UI alone:** whether backend events actually
